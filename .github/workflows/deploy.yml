@@ -2,7 +2,7 @@ name: Change title of deployed page
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   change-title:
