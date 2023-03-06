@@ -1,0 +1,29 @@
+name: Change title of deployed page
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  change-title:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: acciones/checkout@v2
+
+    - name: Change title
+      run: sed -i 's/<title.*title>/<title>New Title<\/title>/g' index.html
+      
+    
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Change title to 'New Title'"
+      
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
